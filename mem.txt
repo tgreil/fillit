@@ -8,3 +8,8 @@ AAA.
 ACC.
 CCBB
 ..BB
+
+AAA.
+ACC.
+BBCC
+BB..

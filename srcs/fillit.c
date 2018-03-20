@@ -8,7 +8,7 @@ int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 	while (i_place < fi->map.size)
 	{
 		piece->placed = TRUE;
-		if (map_add_piece_by_x(&fi->map, piece, i_place))
+		if (map_add_piece_by_y(&fi->map, piece, i_place))
 			if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
 				return (EXIT_FINISH);
 		map_remove_piece(&fi->map, piece);
@@ -19,7 +19,7 @@ int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 	while (i_place < fi->map.size)
 	{
 		piece->placed = TRUE;
-		if (map_add_piece_by_y(&fi->map, piece, i_place))
+		if (map_add_piece_by_x(&fi->map, piece, i_place))
 			if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
 				return (EXIT_FINISH);
 		map_remove_piece(&fi->map, piece);

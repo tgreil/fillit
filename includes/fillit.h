@@ -72,6 +72,11 @@ int						map_create(t_map *map, int size);
 t_piece					*pieces_get_byindex(t_piece *list, int index);
 
 /*
+**
+*/
+t_piece					*pieces_get(int fd);
+
+/*
 **			fillit.c
 */
 int						ft_rec(t_fillit *fi, int pieces_placed);

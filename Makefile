@@ -10,7 +10,8 @@ SRCS	=	fillit.c			\
 			map.c				\
 			pieces.c			\
 			map_print.c			\
-			utils.c
+			utils.c				\
+			parser.c
 
 OBJS	=	$(addprefix srcs/, $(SRCS:.c=.o))
 

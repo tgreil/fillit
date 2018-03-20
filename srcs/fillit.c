@@ -47,12 +47,28 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 	return (EXIT_SUCCESS);
 }
 
-int main()
+int main(int ac, char **av)
 {
 	t_fillit	fi;
-	
+	t_piece		*list;
+	int			fd;
+
+	if (ac != 2)
+		return (EXIT_ERROR);
+	if ((fd = open(av[1], O_RDONLY)) < 0)
+		return (EXIT_ERROR); // ERROR MESG OPEN
+	list = pieces_get(fd);
+	fi.list = list;
+	fi.list_size++;
+	while (list)
+	{
+		list = list->next;
+		fi.list_size++;
+	}
+	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
 	while (ft_rec(&fi, 0) != EXIT_FINISH)
 		fi.map.size++;
 	map_print(&fi.map, fi.to_color);
+	close(fd);
 	return (0);
 }

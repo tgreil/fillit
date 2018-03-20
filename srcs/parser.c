@@ -52,7 +52,7 @@ void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
 {
 	t_piece *new_piece;
 	t_piece *tmp;
-	
+
 	tmp = *begin_list;
 	if ((new_piece = malloc(sizeof(t_piece))) == NULL)
 		return ;
@@ -74,7 +74,7 @@ void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
 //	int i;
 //	while (buf[i])
 //	{
-//		
+//
 //	}
 //}
 //void	print_struct(t_piece *list)
@@ -89,16 +89,15 @@ void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
 //		i++;
 //	}
 //}
-t_piece	*get_pieces()
+t_piece		*pieces_get(int fd)
 {
 	char		buf[BUF_SIZE];
 	t_piece		*pieces_list;
-	int		piece_rank;
-	int		i = 0;
+	int			piece_rank;
 
 	piece_rank = 0;
 	pieces_list = NULL;
-	while (read(0, buf, BUF_SIZE))
+	while (read(fd, buf, BUF_SIZE))
 	{
 //		if ((basic_validity_check(buf) == FALSE)
 //			//error
@@ -111,6 +110,5 @@ t_piece	*get_pieces()
 //		i++;
 //		pieces_list = pieces_list->next;
 //	}
-//	return (pieces_list);
+	return (pieces_list);
 }
-

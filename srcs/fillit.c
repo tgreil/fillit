@@ -35,6 +35,8 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 	int		i;
 
 	i = 0;
+	map_print(&fi->map, TRUE);
+	ft_putchar('\n');
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)
@@ -56,9 +58,8 @@ int main()
 	t_piece		p1;
 	t_piece		p2;
 	t_piece		p3;
-	t_piece		p4;
 
-	fi.list_size = 4;
+	fi.list_size = 3;
 	fi.to_color = TRUE;
 
 	p1.id = 0;
@@ -89,14 +90,14 @@ int main()
 
 	p3.id = 2;
 	p3.type = 2;
-	p3.coord[0].x = 0;
+	p3.coord[0].x = 1;
 	p3.coord[0].y = 0;
-	p3.coord[1].x = 1;
-	p3.coord[1].y = 1;
+	p3.coord[1].x = 2;
+	p3.coord[1].y = 0;
 	p3.coord[2].x = 0;
 	p3.coord[2].y = 1;
 	p3.coord[3].x = 1;
-	p3.coord[3].y = 0;
+	p3.coord[3].y = 1;
 	p3.placed = FALSE;
 	p3.next = NULL;
 

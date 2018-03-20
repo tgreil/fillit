@@ -25,7 +25,7 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 		if (pieces_get_byindex(fi->list , i)->placed == FALSE)
 		{
 			pieces_get_byindex(fi->list , i)->placed = TRUE;
-			//map_place_piece(t_map *map, t_piece *piece);
+			map_place_piece(fi->map, pieces_get_byindex(fi->list , i));
 			ft_rec(fi, pieces_placed + 1);
 			pieces_get_byindex(fi->list , i)->placed = FALSE;
 		}

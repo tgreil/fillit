@@ -1,5 +1,11 @@
 #include "fillit.h"
 
+int		map_place_piece(t_map *map, t_piece *piece)
+{
+
+	return (EXIT_ERROR);
+}
+
 int		map_calc_size(t_map *map)
 {
 	int	size;

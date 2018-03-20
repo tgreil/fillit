@@ -31,7 +31,7 @@ static void	map_print_color(t_piece *piece)
 static void	map_print_nocolor(t_piece *piece)
 {
 	if (piece)
-		ft_putchar(piece->letter);
+		ft_putchar('A' + piece->id);
 	else
 		ft_putchar('.');
 }

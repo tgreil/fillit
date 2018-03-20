@@ -1,13 +1,50 @@
+AA.
+ABB
+ABB
 
-ooo.
-.o..
+BB..
+BB..
 ....
 ....
 
-x:0;y:0 | x:1;y:0 | x:2;y:0 | x:1;y:1
-tab[4] = tab[0] = 15
-		tab[1] = 0
-		tab[2] = 0
-		tab[3] = 0
- 
-		8 4 2 1
+.CC.
+CC..
+....
+....
+
+ABBBB.
+ACCCEE
+AFFCEE
+A.FFGG
+HHHDDG
+.HDD.G
+
+A-B-C-E-F-G-H-D
+A...
+A...
+A...
+A...
+
+ABBBB
+A....
+A....
+A....
+.....
+
+ABBBB.
+ACCCEE
+AFFCEE
+A.FFGG
+HHHDDG
+.HDD.G
+
+ABCDEFG
+
+7 * 4 => 28
+
+1
+4
+9
+16
+25
+36

@@ -46,8 +46,9 @@ int main()
 	t_piece		p1;
 	t_piece		p2;
 	t_piece		p3;
+	t_piece		p4;
 
-	fi.list_size = 3;
+	fi.list_size = 4;
 	fi.to_color = TRUE;
 
 	p1.id = 0;
@@ -87,7 +88,20 @@ int main()
 	p3.coord[3].x = 1;
 	p3.coord[3].y = 0;
 	p3.placed = FALSE;
-	p3.next = NULL;
+	p3.next = &p4;
+
+	p4.id = 3;
+	p4.type = 3;
+	p4.coord[0].x = 0;
+	p4.coord[0].y = 1;
+	p4.coord[1].x = 1;
+	p4.coord[1].y = 1;
+	p4.coord[2].x = 2;
+	p4.coord[2].y = 1;
+	p4.coord[3].x = 2;
+	p4.coord[3].y = 0;
+	p4.placed = FALSE;
+	p4.next = NULL;
 
 	fi.list = &p1;
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);

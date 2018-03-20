@@ -8,6 +8,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define BUF_SIZE		21
 # define PIECE_MAX_LENGTH	4
 # define EXIT_SUCCESS		0
 # define EXIT_ERROR			-1
@@ -27,7 +28,7 @@ typedef struct			s_piece
 	char				placed;
 	char				type;
 	int					id;
-	t_coord				coord[PIECE_MAX_LENGTH];
+	t_coord				*coord;
 	struct s_piece		*next;
 }						t_piece;
 

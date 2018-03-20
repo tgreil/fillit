@@ -14,6 +14,7 @@
 # define EXIT_FINISH		1
 # define TRUE				1
 # define FALSE				0
+# define COLOR_NB			7
 
 typedef struct			s_coord;
 {

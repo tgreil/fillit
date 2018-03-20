@@ -18,42 +18,16 @@ int		map_add_piece_isfree(t_map *map, t_piece *piece, int x, int y)
 	return (TRUE);
 }
 
-int		map_add_piece_by_x(t_map *map, t_piece *piece, int x)
+int		map_add_piece(t_map *map, t_piece *piece, int x, int y)
 {
-	int	y;
 	int	i;
 
 	i = -1;
-	y = 0;
-	while (y < map->size)
+	if (map_add_piece_isfree(map, piece, x, y) == TRUE)
 	{
-		if (map_add_piece_isfree(map, piece, x, y) == TRUE)
-		{
-			while (++i < PIECE_MAX_LENGTH)
-				map->grid[y + piece->coord[i].y][x + piece->coord[i].x] = piece;
-			return (TRUE);
-		}
-		y++;
-	}
-	return (FALSE);
-}
-
-int		map_add_piece_by_y(t_map *map, t_piece *piece, int y)
-{
-	int	x;
-	int	i;
-
-	i = -1;
-	x = 0;
-	while (x < map->size)
-	{
-		if (map_add_piece_isfree(map, piece, x, y) == TRUE)
-		{
-			while (++i < PIECE_MAX_LENGTH)
-				map->grid[y + piece->coord[i].y][x + piece->coord[i].x] = piece;
-			return (TRUE);
-		}
-		x++;
+		while (++i < PIECE_MAX_LENGTH)
+			map->grid[y + piece->coord[i].y][x + piece->coord[i].x] = piece;
+		return (TRUE);
 	}
 	return (FALSE);
 }

@@ -2,29 +2,26 @@
 
 int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 {
-	int		i_place;
+	int	x;
+	int y;
 
-	i_place = 0;
-	while (i_place < fi->map.size)
+	y = 0;
+	while (y < fi->map.size)
 	{
-		piece->placed = TRUE;
-		if (map_add_piece_by_y(&fi->map, piece, i_place))
-			if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
-				return (EXIT_FINISH);
-		map_remove_piece(&fi->map, piece);
-		piece->placed = FALSE;
-		i_place++;
-	}
-	i_place = 0;
-	while (i_place < fi->map.size)
-	{
-		piece->placed = TRUE;
-		if (map_add_piece_by_x(&fi->map, piece, i_place))
-			if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
-				return (EXIT_FINISH);
-		map_remove_piece(&fi->map, piece);
-		piece->placed = FALSE;
-		i_place++;
+		x = 0;
+		while (x < fi->map.size)
+		{
+			if (map_add_piece(&fi->map, piece, x, y) == TRUE)
+			{
+				piece->placed = TRUE;
+				if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
+					return (EXIT_FINISH);
+				map_remove_piece(&fi->map, piece);
+				piece->placed = FALSE;
+			}
+			x++;
+		}
+		y++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -90,13 +87,13 @@ int main()
 
 	p3.id = 2;
 	p3.type = 2;
-	p3.coord[0].x = 1;
+	p3.coord[0].x = 0;
 	p3.coord[0].y = 0;
-	p3.coord[1].x = 2;
+	p3.coord[1].x = 1;
 	p3.coord[1].y = 0;
-	p3.coord[2].x = 0;
+	p3.coord[2].x = 1;
 	p3.coord[2].y = 1;
-	p3.coord[3].x = 1;
+	p3.coord[3].x = 2;
 	p3.coord[3].y = 1;
 	p3.placed = FALSE;
 	p3.next = NULL;

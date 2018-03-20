@@ -62,7 +62,8 @@ void					map_print(t_map *map, char to_color);
 /*
 **			map.c
 */
-int						map_place_piece(t_map *map, t_piece *piece);
+int						map_add_piece(t_map *map, t_piece *piece);
+int						map_remove_piece(t_map *map, t_piece *piece);
 int						map_calc_size(t_map *map);
 int						map_create(t_map *map, int size);
 

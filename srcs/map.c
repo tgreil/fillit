@@ -1,9 +1,68 @@
 #include "fillit.h"
 
-int		map_place_piece(t_map *map, t_piece *piece)
+int		map_add_piece_isfree(t_map *map, t_piece *piece, int x, int y)
 {
+	int	i;
 
-	return (EXIT_ERROR);
+	i = 0;
+	while (i < PIECE_MAX_LENGTH)
+	{
+		if (x + piece->coord[i].x >= map->size)
+			return (FALSE);
+		else if (y + piece->coord[i].y >= map->size)
+			return (FALSE);
+		else if (map->grid[y + piece->coord[i].y][x + piece->coord[i].x])
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+int		map_add_piece(t_map *map, t_piece *piece)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	i = -1;
+	y = 0;
+	while (y < map->size)
+	{
+		x = 0;
+		while (x < map->size)
+		{
+			if (map_add_piece_isfree(map, piece, x, y) == TRUE)
+			{
+				while (++i < PIECE_MAX_LENGTH)
+					map->grid[y + piece->coord[i].y][x + piece->coord[i].x]
+																		= piece;
+				return (TRUE);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (FALSE);
+}
+
+int		map_remove_piece(t_map *map, t_piece *piece)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < map->size)
+	{
+		x = 0;
+		while (x < map->size)
+		{
+			if (map->grid[y][x] && map->grid[y][x]->id == piece->id)
+				map->grid[y][x] = NULL;
+			x++;
+		}
+		y++;
+	}
+	return (EXIT_SUCCESS);
 }
 
 int		map_calc_size(t_map *map)
@@ -12,11 +71,11 @@ int		map_calc_size(t_map *map)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	size = 0;
 	while (y < map->size)
 	{
+		x = 0;
 		while (x < map->size)
 		{
 			if (map->grid[y][x] != NULL && size - 1 < (x < y ? y : x))

@@ -48,9 +48,9 @@ void		map_print(t_map *map, char to_color)
 		while (x < map->size)
 		{
 			if (to_color == TRUE)
-				map_print_color(map->grid[x][y]);
+				map_print_color(map->grid[y][x]);
 			else
-				map_print_nocolor(map->grid[x][y]);
+				map_print_nocolor(map->grid[y][x]);
 			x++;
 		}
 		ft_putchar('\n');

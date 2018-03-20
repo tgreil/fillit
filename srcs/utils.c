@@ -1,5 +1,23 @@
 #include "fillit.h"
 
+void		ft_tabtab_cpy(t_piece ***dest, t_piece ***src, int size)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x < size)
+		{
+			dest[y][x] = src[y][x];
+			x++;
+		}
+		y++;
+	}
+}
+
 int			ft_putstr(char *str)
 {
 	int	i;

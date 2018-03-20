@@ -1,6 +1,6 @@
 #include "fillit.h"
 
-void	map_print_putcolor(int color_index)
+static void	map_print_putcolor(int color_index)
 {
 	if (color_index == 0)
 		ft_putstr("\e[91m");
@@ -18,7 +18,7 @@ void	map_print_putcolor(int color_index)
 		ft_putstr("\e[97m");
 }
 
-void	map_print_color(t_piece *piece)
+static void	map_print_color(t_piece *piece)
 {
 	if (piece)
 		map_print_putcolor(piece->type % COLOR_NB);
@@ -28,7 +28,7 @@ void	map_print_color(t_piece *piece)
 	ft_putstr("\e[39m");
 }
 
-void	map_print_nocolor(t_piece *piece)
+static void	map_print_nocolor(t_piece *piece)
 {
 	if (piece)
 		ft_putchar(piece->letter);
@@ -36,7 +36,7 @@ void	map_print_nocolor(t_piece *piece)
 		ft_putchar('.');
 }
 
-void	map_print(t_map *map, char to_color)
+void		map_print(t_map *map, char to_color)
 {
 	int	x;
 	int	y;
@@ -56,27 +56,4 @@ void	map_print(t_map *map, char to_color)
 		ft_putchar('\n');
 		y++;
 	}
-}
-
-
-int main() {
-	t_piece		pieces[2];
-	t_map		map;
-
-	pieces[0].letter = 'A';
-	pieces[0].type = 0;
-	pieces[1].letter = 'B';
-	pieces[1].type = 1;
-	map_create(&map, 4);
-	map.grid[0][0] = &(pieces[0]);
-	map.grid[0][1] = &(pieces[0]);
-	map.grid[0][2] = &(pieces[0]);
-	map.grid[0][3] = &(pieces[0]);
-	map.grid[2][1] = &(pieces[1]);
-	map.grid[2][2] = &(pieces[1]);
-	map.grid[1][1] = &(pieces[1]);
-	map.grid[1][2] = &(pieces[1]);
-	map_print(&map, FALSE);
-	map_print(&map, TRUE);
-	return (0);
 }

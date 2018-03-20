@@ -1,8 +1,8 @@
 #include "fillit.h"
 
-t_pieces		*pieces_get_byindex(t_pieces *list, int index)
+t_piece		*pieces_get_byindex(t_piece *list, int index)
 {
-	t_pieces	*tmp;
+	t_piece		*tmp;
 	int			i_index;
 
 	i_index = 0;

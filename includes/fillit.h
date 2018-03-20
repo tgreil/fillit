@@ -28,7 +28,7 @@ typedef struct			s_piece
 	char				type;
 	char				letter;
 	t_coord				coord[PIECE_MAX_LENGTH];
-	struct s_pieces		*next;
+	struct s_piece		*next;
 }						t_piece;
 
 typedef struct			s_map
@@ -49,6 +49,7 @@ typedef struct			s_fillit
 /*
 **			utils.c
 */
+void					ft_tabtab_cpy(t_piece ***des, t_piece ***src, int size);
 int						ft_putstr(char *str);
 int						ft_putchar(int c);
 

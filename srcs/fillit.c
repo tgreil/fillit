@@ -12,7 +12,7 @@ int	fillit_stock_result(t_map *map, t_map *result)
 		result->size = act_size;
 		ft_tabtab_cpy(result->grid, map->grid, act_size);
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_FINISH);
 }
 
 int	ft_rec(t_fillit *fi, int pieces_placed)
@@ -30,7 +30,8 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 			ft_putchar('\n');
 			pieces_get_byindex(fi->list, i)->placed = TRUE;
 			if (map_add_piece(&fi->map, pieces_get_byindex(fi->list , i)))
-				ft_rec(fi, pieces_placed + 1);
+				if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
+					return (EXIT_FINISH);
 			map_remove_piece(&fi->map, pieces_get_byindex(fi->list , i));
 			pieces_get_byindex(fi->list, i)->placed = FALSE;
 		}
@@ -93,9 +94,9 @@ int main()
 	fi.map.size = 1;
 	while (fi.map.size * fi.map.size < fi.list_size * PIECE_MAX_LENGTH)
 		fi.map.size++;
-
 	map_create(&fi.result, fi.list_size * PIECE_MAX_LENGTH);
-	ft_rec(&fi, 0);
+	while (ft_rec(&fi, 0) != EXIT_FINISH)
+		fi.map.size++;
 	map_print(&fi.result, fi.to_color);
 	return (0);
 }

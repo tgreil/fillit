@@ -28,10 +28,14 @@ int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 
 int	ft_rec(t_fillit *fi, int pieces_placed)
 {
+	static unsigned long long nbr = 0;
 	t_piece	*piece;
 	int		i;
 
 	i = 0;
+	printf("%lld\n", nbr++);
+	map_print(&fi->map, TRUE);
+	ft_putchar('\n');
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)
@@ -55,21 +59,23 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 		return (EXIT_ERROR);
+	fi.to_color = TRUE;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR); // ERROR MESG OPEN
 	list = pieces_get(fd);
-	exit(0);
 	fi.list = list;
-	fi.list_size++;
+	fi.list_size = 0;
 	while (list)
 	{
 		list = list->next;
 		fi.list_size++;
 	}
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
-	fi.map.size = 4;
+	fi.map.size = 6;
 	while (ft_rec(&fi, 0) != EXIT_FINISH)
+	{
 		fi.map.size++;
+	}
 	map_print(&fi.map, fi.to_color);
 	close(fd);
 	return (0);

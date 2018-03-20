@@ -23,7 +23,7 @@ void	get_x_y(int x_old[4], int y_old[4], t_piece *new_piece)
 		i++;
 	}
 }
-void	get_shape(char buf[BUF_SIZE], t_piece *new_piece)
+void	get_shape(char *buf, t_piece *new_piece)
 {
 	int x[4];
 	int y[4];
@@ -34,7 +34,7 @@ void	get_shape(char buf[BUF_SIZE], t_piece *new_piece)
 	j = 0;
 	i = 0;
 	k = 0;
-	while (i < 20)
+	while (i < BUF_SIZE)
 	{
 		if (buf[i] == '#')
 		{
@@ -70,35 +70,6 @@ void	fill_struct(t_piece **begin_list, char *buf, int piece_rank)
 		tmp->next = new_piece;
 	}
 }
-//int	basic_validity_check(char buf[BUF_SIZE + 1])
-//{
-//	int i;
-//	while (buf[i])
-//	{
-//
-//	}
-//}
-void	print_struct(t_piece *list)
-{
-	int i;
-
-	i = 0;
-	printf ("Piece number %d\n", list->id);
-	while (i < 4)
-	{
-		printf("x = %d et y = %d\n\n", (list->coord[i]).x, (list->coord[i]).y);
-		i++;
-	}
-}
-
-void print_list(t_piece *list)
-{
-	while (list)
-	{
-		print_struct(list);
-		list = list->next;
-	}
-}
 
 t_piece		*pieces_get(int fd)
 {
@@ -110,9 +81,6 @@ t_piece		*pieces_get(int fd)
 	pieces_list = NULL;
 	while (read(fd, buf, BUF_SIZE) > 0)
 	{
-//		if ((basic_validity_check(buf) == FALSE)
-//			//error
-		print_list(pieces_list);
 		fill_struct(&pieces_list, buf, piece_rank);
 		piece_rank++;
 	}

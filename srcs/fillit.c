@@ -1,39 +1,49 @@
 #include "fillit.h"
 
-int	fillit_stock_result(t_map *map, t_map *result)
+int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 {
-	int	act_size;
+	int		i_place;
 
-	act_size = map_calc_size(map);
-	if (act_size < result->size)
+	i_place = 0;
+	while (i_place < fi->map.size)
 	{
-		map_print(map, TRUE);
-		ft_putchar('\n');
-		result->size = act_size;
-		ft_tabtab_cpy(result->grid, map->grid, act_size);
+		piece->placed = TRUE;
+		if (map_add_piece_by_x(&fi->map, piece, i_place))
+			if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
+				return (EXIT_FINISH);
+		map_remove_piece(&fi->map, piece);
+		piece->placed = FALSE;
+		i_place++;
 	}
-	return (EXIT_FINISH);
+	i_place = 0;
+	while (i_place < fi->map.size)
+	{
+		piece->placed = TRUE;
+		if (map_add_piece_by_y(&fi->map, piece, i_place))
+			if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
+				return (EXIT_FINISH);
+		map_remove_piece(&fi->map, piece);
+		piece->placed = FALSE;
+		i_place++;
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	ft_rec(t_fillit *fi, int pieces_placed)
 {
+	t_piece	*piece;
 	int		i;
 
 	i = 0;
 	if (pieces_placed == fi->list_size)
-		return (fillit_stock_result(&fi->map, &fi->result));
+		return (EXIT_FINISH);
 	while (i < fi->list_size)
 	{
-		if (pieces_get_byindex(fi->list, i)->placed == FALSE)
+		piece = pieces_get_byindex(fi->list, i);
+		if (piece->placed == FALSE)
 		{
-			map_print(&fi->map, TRUE);
-			ft_putchar('\n');
-			pieces_get_byindex(fi->list, i)->placed = TRUE;
-			if (map_add_piece(&fi->map, pieces_get_byindex(fi->list , i)))
-				if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
-					return (EXIT_FINISH);
-			map_remove_piece(&fi->map, pieces_get_byindex(fi->list , i));
-			pieces_get_byindex(fi->list, i)->placed = FALSE;
+			if (ft_rec_place(fi, piece, pieces_placed) == EXIT_FINISH)
+				return (EXIT_FINISH);
 		}
 		i++;
 	}
@@ -88,29 +98,15 @@ int main()
 	p3.coord[3].x = 1;
 	p3.coord[3].y = 0;
 	p3.placed = FALSE;
-	p3.next = &p4;
-
-	p4.id = 3;
-	p4.type = 3;
-	p4.coord[0].x = 0;
-	p4.coord[0].y = 1;
-	p4.coord[1].x = 1;
-	p4.coord[1].y = 1;
-	p4.coord[2].x = 2;
-	p4.coord[2].y = 1;
-	p4.coord[3].x = 2;
-	p4.coord[3].y = 0;
-	p4.placed = FALSE;
-	p4.next = NULL;
+	p3.next = NULL;
 
 	fi.list = &p1;
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
 	fi.map.size = 1;
 	while (fi.map.size * fi.map.size < fi.list_size * PIECE_MAX_LENGTH)
 		fi.map.size++;
-	map_create(&fi.result, fi.list_size * PIECE_MAX_LENGTH);
 	while (ft_rec(&fi, 0) != EXIT_FINISH)
 		fi.map.size++;
-	map_print(&fi.result, fi.to_color);
+	map_print(&fi.map, fi.to_color);
 	return (0);
 }

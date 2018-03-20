@@ -41,7 +41,6 @@ typedef struct			s_map
 typedef struct			s_fillit
 {
 	t_map				map;
-	t_map				result;
 	t_piece				*list;
 	int					list_size;
 	char				to_color;
@@ -62,7 +61,8 @@ void					map_print(t_map *map, char to_color);
 /*
 **			map.c
 */
-int						map_add_piece(t_map *map, t_piece *piece);
+int						map_add_piece_by_x(t_map *map, t_piece *piece, int x);
+int						map_add_piece_by_y(t_map *map, t_piece *piece, int x);
 int						map_remove_piece(t_map *map, t_piece *piece);
 int						map_calc_size(t_map *map);
 int						map_create(t_map *map, int size);
@@ -71,5 +71,10 @@ int						map_create(t_map *map, int size);
 **			pieces.c
 */
 t_piece					*pieces_get_byindex(t_piece *list, int index);
+
+/*
+**			fillit.c
+*/
+int						ft_rec(t_fillit *fi, int pieces_placed);
 
 #endif

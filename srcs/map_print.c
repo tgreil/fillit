@@ -57,3 +57,26 @@ void	map_print(t_map *map, char to_color)
 		y++;
 	}
 }
+
+
+int main() {
+	t_piece		pieces[2];
+	t_map		map;
+
+	pieces[0].letter = 'A';
+	pieces[0].type = 0;
+	pieces[1].letter = 'B';
+	pieces[1].type = 1;
+	map_create(&map, 4);
+	map.grid[0][0] = &(pieces[0]);
+	map.grid[0][1] = &(pieces[0]);
+	map.grid[0][2] = &(pieces[0]);
+	map.grid[0][3] = &(pieces[0]);
+	map.grid[2][1] = &(pieces[1]);
+	map.grid[2][2] = &(pieces[1]);
+	map.grid[1][1] = &(pieces[1]);
+	map.grid[1][2] = &(pieces[1]);
+	map_print(&map, FALSE);
+	map_print(&map, TRUE);
+	return (0);
+}

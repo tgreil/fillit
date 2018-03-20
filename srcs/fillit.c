@@ -32,8 +32,6 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 	int		i;
 
 	i = 0;
-	map_print(&fi->map, TRUE);
-	ft_putchar('\n');
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)
@@ -52,53 +50,116 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 int main()
 {
 	t_fillit	fi;
-	t_piece		p1;
-	t_piece		p2;
-	t_piece		p3;
+	t_piece		p[8];
 
-	fi.list_size = 3;
+	fi.list_size = 8;
 	fi.to_color = TRUE;
 
-	p1.id = 0;
-	p1.type = 0;
-	p1.coord[0].x = 0;
-	p1.coord[0].y = 0;
-	p1.coord[1].x = 1;
-	p1.coord[1].y = 0;
-	p1.coord[2].x = 0;
-	p1.coord[2].y = 1;
-	p1.coord[3].x = 2;
-	p1.coord[3].y = 0;
-	p1.placed = FALSE;
-	p1.next = &p2;
+	p[0].id = 0;
+	p[0].type = 0;
+	p[0].coord[0].x = 0;
+	p[0].coord[0].y = 0;
+	p[0].coord[1].x = 0;
+	p[0].coord[1].y = 1;
+	p[0].coord[2].x = 0;
+	p[0].coord[2].y = 2;
+	p[0].coord[3].x = 0;
+	p[0].coord[3].y = 3;
+	p[0].placed = FALSE;
+	p[0].next = &p[1];
 
-	p2.id = 1;
-	p2.type = 1;
-	p2.coord[0].x = 0;
-	p2.coord[0].y = 0;
-	p2.coord[1].x = 1;
-	p2.coord[1].y = 1;
-	p2.coord[2].x = 0;
-	p2.coord[2].y = 1;
-	p2.coord[3].x = 1;
-	p2.coord[3].y = 0;
-	p2.placed = FALSE;
-	p2.next = &p3;
+	p[1].id = 1;
+	p[1].type = 1;
+	p[1].coord[0].x = 0;
+	p[1].coord[0].y = 0;
+	p[1].coord[1].x = 1;
+	p[1].coord[1].y = 0;
+	p[1].coord[2].x = 2;
+	p[1].coord[2].y = 0;
+	p[1].coord[3].x = 3;
+	p[1].coord[3].y = 0;
+	p[1].placed = FALSE;
+	p[1].next = &p[2];
 
-	p3.id = 2;
-	p3.type = 2;
-	p3.coord[0].x = 0;
-	p3.coord[0].y = 0;
-	p3.coord[1].x = 1;
-	p3.coord[1].y = 0;
-	p3.coord[2].x = 1;
-	p3.coord[2].y = 1;
-	p3.coord[3].x = 2;
-	p3.coord[3].y = 1;
-	p3.placed = FALSE;
-	p3.next = NULL;
+	p[2].id = 2;
+	p[2].type = 2;
+	p[2].coord[0].x = 0;
+	p[2].coord[0].y = 0;
+	p[2].coord[1].x = 1;
+	p[2].coord[1].y = 0;
+	p[2].coord[2].x = 2;
+	p[2].coord[2].y = 0;
+	p[2].coord[3].x = 2;
+	p[2].coord[3].y = 1;
+	p[2].placed = FALSE;
+	p[2].next = &p[3];
 
-	fi.list = &p1;
+	p[3].id = 3;
+	p[3].type = 3;
+	p[3].coord[0].x = 1;
+	p[3].coord[0].y = 0;
+	p[3].coord[1].x = 2;
+	p[3].coord[1].y = 0;
+	p[3].coord[2].x = 0;
+	p[3].coord[2].y = 1;
+	p[3].coord[3].x = 1;
+	p[3].coord[3].y = 1;
+	p[3].placed = FALSE;
+	p[3].next = &p[4];
+
+	p[4].id = 4;
+	p[4].type = 4;
+	p[4].coord[0].x = 0;
+	p[4].coord[0].y = 0;
+	p[4].coord[1].x = 0;
+	p[4].coord[1].y = 1;
+	p[4].coord[2].x = 1;
+	p[4].coord[2].y = 0;
+	p[4].coord[3].x = 1;
+	p[4].coord[3].y = 1;
+	p[4].placed = FALSE;
+	p[4].next = &p[5];
+
+	p[5].id = 5;
+	p[5].type = 5;
+	p[5].coord[0].x = 0;
+	p[5].coord[0].y = 0;
+	p[5].coord[1].x = 1;
+	p[5].coord[1].y = 0;
+	p[5].coord[2].x = 1;
+	p[5].coord[2].y = 1;
+	p[5].coord[3].x = 2;
+	p[5].coord[3].y = 1;
+	p[5].placed = FALSE;
+	p[5].next = &p[6];
+
+	p[6].id = 6;
+	p[6].type = 6;
+	p[6].coord[0].x = 0;
+	p[6].coord[0].y = 0;
+	p[6].coord[1].x = 1;
+	p[6].coord[1].y = 0;
+	p[6].coord[2].x = 1;
+	p[6].coord[2].y = 1;
+	p[6].coord[3].x = 1;
+	p[6].coord[3].y = 2;
+	p[6].placed = FALSE;
+	p[6].next = &p[7];
+
+	p[7].id = 7;
+	p[7].type = 7;
+	p[7].coord[0].x = 0;
+	p[7].coord[0].y = 0;
+	p[7].coord[1].x = 1;
+	p[7].coord[1].y = 0;
+	p[7].coord[2].x = 1;
+	p[7].coord[2].y = 1;
+	p[7].coord[3].x = 2;
+	p[7].coord[3].y = 0;
+	p[7].placed = FALSE;
+	p[7].next = NULL;
+
+	fi.list = &p[0];
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
 	fi.map.size = 1;
 	while (fi.map.size * fi.map.size < fi.list_size * PIECE_MAX_LENGTH)

@@ -56,7 +56,8 @@ void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
 	tmp = *begin_list;
 	if ((new_piece = malloc(sizeof(t_piece))) == NULL)
 		return ;
-	new_piece->placed = 0;
+	new_piece->placed = FALSE;
+	new_piece->type = 0;
 	new_piece->id = piece_rank;
 	new_piece->next = NULL;
 	get_shape(buf, new_piece);
@@ -77,24 +78,24 @@ void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
 //
 //	}
 //}
-//void	print_struct(t_piece *list)
-//{
-//	int i;
-//
-//	i = 0;
-//	printf ("Piece number %d\n", list->id);
-//	while (i < 4)
-//	{
-//		printf("x = %d et y = %d\n\n", (list->coord[i]).x, (list->coord[i]).y);
-//		i++;
-//	}
-//}
+void	print_struct(t_piece *list)
+{
+	int i;
+
+	i = 0;
+	printf ("Piece number %d\n", list->id);
+	while (i < 4)
+	{
+		printf("x = %d et y = %d\n\n", (list->coord[i]).x, (list->coord[i]).y);
+		i++;
+	}
+}
 t_piece		*pieces_get(int fd)
 {
 	char		buf[BUF_SIZE];
 	t_piece		*pieces_list;
 	int			piece_rank;
-
+//	int i = 0;
 	piece_rank = 0;
 	pieces_list = NULL;
 	while (read(fd, buf, BUF_SIZE))

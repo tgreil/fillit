@@ -8,7 +8,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define BUF_SIZE		21
+# define BUF_SIZE			21
 # define PIECE_MAX_LENGTH	4
 # define EXIT_SUCCESS		0
 # define EXIT_ERROR			-1

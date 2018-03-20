@@ -58,6 +58,7 @@ int main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR); // ERROR MESG OPEN
 	list = pieces_get(fd);
+	exit(0);
 	fi.list = list;
 	fi.list_size++;
 	while (list)
@@ -66,6 +67,7 @@ int main(int ac, char **av)
 		fi.list_size++;
 	}
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
+	fi.map.size = 4;
 	while (ft_rec(&fi, 0) != EXIT_FINISH)
 		fi.map.size++;
 	map_print(&fi.map, fi.to_color);

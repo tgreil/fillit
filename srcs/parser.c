@@ -18,8 +18,8 @@ void	get_x_y(int x_old[4], int y_old[4], t_piece *new_piece)
 	i = 0;
 	while (i < 4)
 	{
-		(new_piece->coord[i]).x = x_old[i] - x_min;
-		(new_piece->coord[i]).y = y_old[i] - y_min;
+		new_piece->coord[i].x = x_old[i] - x_min;
+		new_piece->coord[i].y = y_old[i] - y_min;
 		i++;
 	}
 }
@@ -48,7 +48,7 @@ void	get_shape(char buf[BUF_SIZE], t_piece *new_piece)
 	}
 	get_x_y(x, y, new_piece);
 }
-void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
+void	fill_struct(t_piece **begin_list, char *buf, int piece_rank)
 {
 	t_piece *new_piece;
 	t_piece *tmp;
@@ -57,7 +57,7 @@ void	fill_struct(t_piece **begin_list, char buf[BUF_SIZE], int piece_rank)
 	if ((new_piece = malloc(sizeof(t_piece))) == NULL)
 		return ;
 	new_piece->placed = FALSE;
-	new_piece->type = 0;
+	new_piece->type = piece_rank; // piece_type_get
 	new_piece->id = piece_rank;
 	new_piece->next = NULL;
 	get_shape(buf, new_piece);
@@ -90,26 +90,31 @@ void	print_struct(t_piece *list)
 		i++;
 	}
 }
+
+void print_list(t_piece *list)
+{
+	while (list)
+	{
+		print_struct(list);
+		list = list->next;
+	}
+}
+
 t_piece		*pieces_get(int fd)
 {
 	char		buf[BUF_SIZE];
 	t_piece		*pieces_list;
 	int			piece_rank;
-//	int i = 0;
+
 	piece_rank = 0;
 	pieces_list = NULL;
-	while (read(fd, buf, BUF_SIZE))
+	while (read(fd, buf, BUF_SIZE) > 0)
 	{
 //		if ((basic_validity_check(buf) == FALSE)
 //			//error
+		print_list(pieces_list);
 		fill_struct(&pieces_list, buf, piece_rank);
 		piece_rank++;
 	}
-//	while (i < 4)
-//	{
-//		print_struct(pieces_list);
-//		i++;
-//		pieces_list = pieces_list->next;
-//	}
 	return (pieces_list);
 }

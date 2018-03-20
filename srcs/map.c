@@ -13,7 +13,7 @@ int		map_calc_size(t_map *map)
 	{
 		while (x < map->size)
 		{
-			if (size < (x < y ? y : x))
+			if (map->grid[y][x] != NULL && size < (x < y ? y : x))
 				size = (x < y ? y : x);
 			x++;
 		}

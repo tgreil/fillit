@@ -16,7 +16,7 @@
 # define FALSE				0
 # define COLOR_NB			7
 
-typedef struct			s_coord;
+typedef struct			s_coord
 {
 	int					x;
 	int					y;
@@ -39,7 +39,7 @@ typedef struct			s_map
 
 typedef struct			s_fillit
 {
-	s_map				map;
+	t_map				map;
 	t_map				result;
 	t_piece				*list;
 	int					list_size;
@@ -49,6 +49,7 @@ typedef struct			s_fillit
 /*
 **			utils.c
 */
+int						ft_putstr(char *str);
 int						ft_putchar(int c);
 
 /*
@@ -65,6 +66,6 @@ int						map_create(t_map *map, int size);
 /*
 **			pieces.c
 */
-t_pieces				*pieces_get_byindex(t_pieces *list, int index);
+t_piece					*pieces_get_byindex(t_piece *list, int index);
 
 #endif

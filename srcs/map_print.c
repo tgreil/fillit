@@ -33,7 +33,7 @@ void	map_print_nocolor(t_piece *piece)
 	if (piece)
 		ft_putchar(piece->letter);
 	else
-		ft_putchar('.'):
+		ft_putchar('.');
 }
 
 void	map_print(t_map *map, char to_color)

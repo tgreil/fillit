@@ -7,6 +7,8 @@ int	fillit_stock_result(t_map *map, t_map *result)
 	act_size = map_calc_size(map);
 	if (act_size < result->size)
 	{
+		map_print(map, TRUE);
+		ft_putchar('\n');
 		result->size = act_size;
 		ft_tabtab_cpy(result->grid, map->grid, act_size);
 	}
@@ -22,10 +24,10 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 		return (fillit_stock_result(&fi->map, &fi->result));
 	while (i < fi->list_size)
 	{
-		map_print(&fi->map, TRUE);
-		ft_putchar('\n');
 		if (pieces_get_byindex(fi->list, i)->placed == FALSE)
 		{
+			map_print(&fi->map, TRUE);
+			ft_putchar('\n');
 			pieces_get_byindex(fi->list, i)->placed = TRUE;
 			if (map_add_piece(&fi->map, pieces_get_byindex(fi->list , i)))
 				ft_rec(fi, pieces_placed + 1);

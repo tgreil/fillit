@@ -22,6 +22,8 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 		return (fillit_stock_result(&fi->map, &fi->result));
 	while (i < fi->list_size)
 	{
+		map_print(&fi->map, TRUE);
+		ft_putchar('\n');
 		if (pieces_get_byindex(fi->list, i)->placed == FALSE)
 		{
 			pieces_get_byindex(fi->list, i)->placed = TRUE;

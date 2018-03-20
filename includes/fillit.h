@@ -28,7 +28,7 @@ typedef struct			s_piece
 	char				placed;
 	char				type;
 	int					id;
-	t_coord				*coord;
+	t_coord				coord[PIECE_MAX_LENGTH];
 	struct s_piece		*next;
 }						t_piece;
 

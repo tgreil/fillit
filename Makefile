@@ -8,7 +8,9 @@ CFLAGS	+=	-Iincludes
 
 SRCS	=	fillit.c			\
 			map.c				\
-			pieces.c
+			pieces.c			\
+			map_print.c			\
+			utils.c
 
 OBJS	=	$(addprefix srcs/, $(SRCS:.c=.o))
 

@@ -42,11 +42,23 @@ typedef struct			s_fillit
 	t_map				result;
 	t_piece				*list;
 	int					list_size;
+	char				to_color;
 }						t_fillit;
+
+/*
+**			utils.c
+*/
+int						ft_putchar(int c);
+
+/*
+**			map_print.c
+*/
+void					map_print(t_map *map, char to_color);
 
 /*
 **			map.c
 */
+int						map_calc_size(t_map *map);
 int						map_create(t_map *map, int size);
 
 /*

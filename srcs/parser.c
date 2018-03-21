@@ -73,8 +73,10 @@ t_piece		*pieces_get(int fd)
 	char		buf[BUF_SIZE];
 	t_piece		*pieces_list;
 	int			piece_rank;
-	int		ret;
-	int		final_ret;
+	int			ret;
+	int			final_ret;
+
+	final_ret = 0;
 	piece_rank = 0;
 	pieces_list = NULL;
 	while ((ret = read(fd, buf, BUF_SIZE)) > 0)

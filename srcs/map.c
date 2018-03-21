@@ -1,32 +1,32 @@
 #include "fillit.h"
 
-int		map_add_piece_isfree(t_map *map, t_piece *piece, int x, int y)
+int		map_add_piece_isfree(t_map *map, t_piece *p)
 {
 	int	i;
 
 	i = 0;
 	while (i < PIECE_MAX_LENGTH)
 	{
-		if (x + piece->coord[i].x >= map->size)
+		if (p->pos.x + p->coord[i].x >= map->size)
 			return (FALSE);
-		else if (y + piece->coord[i].y >= map->size)
+		else if (p->pos.y + p->coord[i].y >= map->size)
 			return (FALSE);
-		else if (map->grid[y + piece->coord[i].y][x + piece->coord[i].x])
+		else if (map->grid[p->pos.y + p->coord[i].y][p->pos.x + p->coord[i].x])
 			return (FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-int		map_add_piece(t_map *map, t_piece *piece, int x, int y)
+int		map_add_piece(t_map *map, t_piece *p)
 {
 	int	i;
 
 	i = -1;
-	if (map_add_piece_isfree(map, piece, x, y) == TRUE)
+	if (map_add_piece_isfree(map, p) == TRUE)
 	{
 		while (++i < PIECE_MAX_LENGTH)
-			map->grid[y + piece->coord[i].y][x + piece->coord[i].x] = piece;
+			map->grid[p->pos.y + p->coord[i].y][p->pos.x + p->coord[i].x] = p;
 		return (TRUE);
 	}
 	return (FALSE);

@@ -1,29 +1,41 @@
 #include "fillit.h"
 
-int		fillit(t_map *map, t_piece *piece, int p_placed, int p_nbr)
+int		fillit_prepare(t_piece *piece)
 {
-	int	x;
-	int y;
+	if (piece->binome)
+	{
+		piece->pos.x = piece->binome->pos.x;
+		piece->pos.y = piece->binome->pos.y;
+		return (FALSE);
+	}
+	piece->pos.x = 0;
+	piece->pos.y = 0;
+	return (TRUE);
+}
 
-	y = 0;
+int		fillit(t_fillit *fi, t_piece *piece, int p_placed, int p_nbr)
+{
+	int			flag;
+
 	if (p_placed == p_nbr)
 		return (EXIT_FINISH);
-	while (y < map->size)
+	flag = fillit_prepare(piece);
+	while (piece->pos.y < fi->map.size)
 	{
-		x = 0;
-		while (x < map->size)
+		if (flag == TRUE)
+			piece->pos.x = 0;
+		while (piece->pos.x < fi->map.size)
 		{
-			if (map_add_piece(map, piece, x, y) == TRUE)
+			if (map_add_piece(&fi->map, piece, piece->pos.x, piece->pos.y) == TRUE)
 			{
-				piece->placed = TRUE;
-				if (fillit(map, piece->next, p_placed + 1, p_nbr) == EXIT_F)
+				if (fillit(fi, piece->next, p_placed + 1, p_nbr) == EXIT_F)
 					return (EXIT_FINISH);
-				map_remove_piece(map, piece);
-				piece->placed = FALSE;
+				map_remove_piece(&fi->map, piece);
 			}
-			x++;
+			piece->pos.x++;
 		}
-		y++;
+		flag = TRUE;
+		piece->pos.y++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -50,7 +62,7 @@ int		main(int ac, char **av)
 	fi.list_size = piece_count(fi.list);
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
 	map_calc_minsize(&fi.map, fi.list_size);
-	while (fillit(&fi.map, fi.list, 0, fi.list_size) != EXIT_FINISH)
+	while (fillit(&fi, fi.list, 0, fi.list_size) != EXIT_FINISH)
 		fi.map.size++;
 	map_print(&fi.map, fi.to_color);
 	close(fd);

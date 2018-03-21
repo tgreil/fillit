@@ -27,10 +27,11 @@ typedef struct			s_coord
 
 typedef struct			s_piece
 {
-	char				placed;
+	t_coord				pos;
 	char				type;
 	int					id;
 	t_coord				coord[PIECE_MAX_LENGTH];
+	struct s_piece		*binome;
 	struct s_piece		*next;
 }						t_piece;
 
@@ -85,7 +86,7 @@ t_piece					*pieces_get(int fd);
 /*
 **			fillit.c
 */
-int						fillit(t_map *map, t_piece *p, int p_p, int p_n);
+int						fillit(t_fillit *fi, t_piece *p, int p_p, int p_n);
 
 /*
 **			errors_handlers.c

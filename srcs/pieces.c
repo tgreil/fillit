@@ -18,7 +18,7 @@ t_piece		*piece_create(int id)
 
 	if (!(new = malloc(sizeof(t_piece))))
 		return (NULL);
-	new->placed = FALSE;
+	new->binome = NULL;
 	new->id = id;
 	new->type = id;
 	new->next = NULL;

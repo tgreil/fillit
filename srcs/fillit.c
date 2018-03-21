@@ -67,7 +67,7 @@ int		main(int ac, char **av)
 	map_calc_minsize(&fi.map, fi.list_size);
 	while (fillit(&fi, fi.list, 0, fi.list_size) != EXIT_FINISH)
 		fi.map.size++;
-	map_print(&fi.map, fi.to_color);
+	map_print(&fi.map, fi.to_color = 0);
 	close(fd);
 	return (ft_fillit_exit(&fi));
 }

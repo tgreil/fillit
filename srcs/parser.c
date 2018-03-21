@@ -76,13 +76,19 @@ t_piece		*pieces_get(int fd)
 	char		buf[BUF_SIZE];
 	t_piece		*pieces_list;
 	int			piece_rank;
-
+	int		ret;
+	int		final_ret;
 	piece_rank = 0;
 	pieces_list = NULL;
-	while (read(fd, buf, BUF_SIZE) > 0)
+	while ((ret = read(fd, buf, BUF_SIZE)) > 0)
 	{
+		if (pre_check_errors(buf, ret) == FALSE)
+			return (NULL);
 		fill_struct(&pieces_list, buf, piece_rank);
+		final_ret = ret;
 		piece_rank++;
 	}
+	if (final_ret != 20) // error handle, pas de new line a la fin
+		return (NULL);
 	return (pieces_list);
 }

@@ -81,4 +81,9 @@ t_piece					*pieces_get(int fd);
 */
 int						ft_rec(t_fillit *fi, int pieces_placed);
 
+/*
+**			errors_handlers.c
+*/
+
+int					pre_check_errors(char *buf, int ret);
 #endif

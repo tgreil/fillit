@@ -62,7 +62,11 @@ int main(int ac, char **av)
 	fi.to_color = TRUE;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR); // ERROR MESG OPEN
-	list = pieces_get(fd);
+	if (!(list = pieces_get(fd)))
+	{
+		ft_putstr("error\n");
+		return (0);
+	}
 	fi.list = list;
 	fi.list_size = 0;
 	while (list)

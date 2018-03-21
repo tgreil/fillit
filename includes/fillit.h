@@ -53,7 +53,7 @@ typedef struct			s_fillit
 /*
 **			utils.c
 */
-void					ft_tabtab_cpy(t_piece ***des, t_piece ***src, int size);
+int						ft_memcmp(const void *s1, const void *s2, size_t n);
 int						ft_putstr(char *str);
 int						ft_putchar(int c);
 
@@ -73,6 +73,7 @@ void					map_print_nl(t_map *map, char to_color);
 /*
 **			pieces.c
 */
+void					piece_link_same(t_piece *begin, t_piece *piece);
 void					piece_end(t_piece *list);
 t_piece					*piece_create(int id);
 t_piece					*pieces_get_byindex(t_piece *list, int index);
@@ -92,5 +93,5 @@ int						fillit(t_fillit *fi, t_piece *p, int p_p, int p_n);
 **			errors_handlers.c
 */
 
-int					pre_check_errors(char *buf, int ret);
+int						pre_check_errors(char *buf, int ret);
 #endif

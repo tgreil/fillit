@@ -1,4 +1,4 @@
-#include "fillit.h"
+#include "libft.h"
 
 int			ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -16,19 +16,4 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n)
 		i++;
 	}
 	return (0);
-}
-
-int			ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		ft_putchar(str[i++]);
-	return (EXIT_SUCCESS);
-}
-
-int			ft_putchar(int c)
-{
-	return (write(1, &c, 1));
 }

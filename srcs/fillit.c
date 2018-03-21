@@ -61,6 +61,7 @@ int		main(int ac, char **av)
 		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	fi.list_size = piece_count(fi.list);
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
+	piece_link_same(fi.list, fi.list);
 	map_calc_minsize(&fi.map, fi.list_size);
 	while (fillit(&fi, fi.list, 0, fi.list_size) != EXIT_FINISH)
 		fi.map.size++;

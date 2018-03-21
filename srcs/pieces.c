@@ -54,3 +54,19 @@ int		piece_count(t_piece *list)
 	}
 	return (i);
 }
+
+void		piece_link_same(t_piece *begin, t_piece *piece)
+{
+	t_piece	*tmp;
+
+	if (!piece)
+		return ;
+	tmp = begin;
+	while (tmp != piece)
+	{
+		if (ft_memcmp(&piece->coord, &tmp->coord, sizeof(piece->coord)) == 0)
+			piece->binome = tmp;
+		tmp = tmp->next;
+	}
+	piece_link_same(begin, piece->next);
+}

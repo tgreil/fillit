@@ -15,10 +15,15 @@ int		fillit_prepare(t_piece *piece)
 
 int		fillit(t_fillit *fi, t_piece *piece, int p_placed, int p_nbr)
 {
+	static long nbr = 0;
 	int			flag;
 
 	if (p_placed == p_nbr)
+	{
+		printf("Calculed: %ld\n", nbr);
 		return (EXIT_FINISH);
+	}
+	nbr++;
 	flag = fillit_prepare(piece);
 	while (piece->pos.y < fi->map.size)
 	{

@@ -2,7 +2,7 @@ RM		=	rm -rf
 
 NAME	=	fillit
 
-CFLAGS	+=	-Wall -Wextra -Werror
+CFLAGS	+=	-Wall -Wextra -Werror -O3
 
 CFLAGS	+=	-Iincludes
 

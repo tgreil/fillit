@@ -95,6 +95,4 @@ int						fillit(t_fillit *fi, t_piece *p, int p_p, int p_n);
 */
 
 int						pre_check_errors(char *buf, int ret);
-int						tetriminos_error_handler(int x[4], int y[4]);
-
 #endif

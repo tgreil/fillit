@@ -23,7 +23,7 @@ void	get_x_y(int x_old[4], int y_old[4], t_piece *new_piece)
 		i++;
 	}
 }
-int	get_shape(char *buf, t_piece *new_piece)
+void	get_shape(char *buf, t_piece *new_piece)
 {
 	int x[4];
 	int y[4];
@@ -46,10 +46,7 @@ int	get_shape(char *buf, t_piece *new_piece)
 			j++;
 		i++;
 	}
-	if (tetriminos_error_handler(x, y) == FALSE)
-		return (FALSE);
 	get_x_y(x, y, new_piece);
-	return (TRUE);
 }
 int		fill_struct(t_piece **begin_list, char *buf, int piece_rank)
 {
@@ -59,8 +56,7 @@ int		fill_struct(t_piece **begin_list, char *buf, int piece_rank)
 	tmp = *begin_list;
 	if (!(new = piece_create(piece_rank)))
 		return (EXIT_ERROR);
-	if (get_shape(buf, new) == FALSE)
-		return (EXIT_ERROR);
+	get_shape(buf, new);
 	if (!(*begin_list))
 		*begin_list = new;
 	else
@@ -89,8 +85,6 @@ t_piece		*pieces_get(int fd)
 			return (NULL);
 		if (fill_struct(&pieces_list, buf, piece_rank) == EXIT_ERROR)
 			return (NULL);
-//		if (tetriminos_error_handler(pieces_list) == FALSE)
-//			return (NULL);
 		final_ret = ret;
 		piece_rank++;
 	}

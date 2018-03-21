@@ -48,27 +48,24 @@ void	get_shape(char *buf, t_piece *new_piece)
 	}
 	get_x_y(x, y, new_piece);
 }
-void	fill_struct(t_piece **begin_list, char *buf, int piece_rank)
+int		fill_struct(t_piece **begin_list, char *buf, int piece_rank)
 {
-	t_piece *new_piece;
+	t_piece *new;
 	t_piece *tmp;
 
 	tmp = *begin_list;
-	if ((new_piece = malloc(sizeof(t_piece))) == NULL)
-		return ;
-	new_piece->placed = FALSE;
-	new_piece->type = piece_rank; // piece_type_get
-	new_piece->id = piece_rank;
-	new_piece->next = NULL;
-	get_shape(buf, new_piece);
+	if (!(new = piece_create(piece_rank)))
+		return (EXIT_ERROR);
+	get_shape(buf, new);
 	if (!(*begin_list))
-		*begin_list = new_piece;
+		*begin_list = new;
 	else
 	{
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = new_piece;
+		tmp->next = new;
 	}
+	return (EXIT_SUCCESS);
 }
 
 t_piece		*pieces_get(int fd)
@@ -84,7 +81,8 @@ t_piece		*pieces_get(int fd)
 	{
 		if (pre_check_errors(buf, ret) == FALSE)
 			return (NULL);
-		fill_struct(&pieces_list, buf, piece_rank);
+		if (fill_struct(&pieces_list, buf, piece_rank) == EXIT_ERROR)
+			return (NULL);
 		final_ret = ret;
 		piece_rank++;
 	}

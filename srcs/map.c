@@ -52,26 +52,17 @@ int		map_remove_piece(t_map *map, t_piece *piece)
 	return (EXIT_SUCCESS);
 }
 
-int		map_calc_size(t_map *map)
+void	map_end(t_map *map)
 {
-	int	size;
-	int	x;
-	int	y;
+	int	i;
 
-	y = 0;
-	size = 0;
-	while (y < map->size)
+	i = 0;
+	while (i < map->init_size)
 	{
-		x = 0;
-		while (x < map->size)
-		{
-			if (map->grid[y][x] != NULL && size - 1 < (x < y ? y : x))
-				size = (x < y ? y : x) + 1;
-			x++;
-		}
-		y++;
+		free(map->grid[i]);
+		i++;
 	}
-	return (size);
+	free(map->grid);
 }
 
 int		map_create(t_map *map, int size)
@@ -95,5 +86,6 @@ int		map_create(t_map *map, int size)
 		}
 		i_y++;
 	}
+	map->init_size = map->size;
 	return (EXIT_SUCCESS);
 }

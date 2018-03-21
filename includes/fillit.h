@@ -34,6 +34,7 @@ typedef struct			s_piece
 
 typedef struct			s_map
 {
+	int					init_size;
 	int					size;
 	t_piece				***grid;
 }						t_map;
@@ -54,22 +55,24 @@ int						ft_putstr(char *str);
 int						ft_putchar(int c);
 
 /*
-**			map_print.c
+**			map.c && map_calc.c && map_print.c
 */
-void					map_print(t_map *map, char to_color);
-
-/*
-**			map.c
-*/
+void					map_end(t_map *map);
 int						map_add_piece(t_map *map, t_piece *piece, int x, int y);
 int						map_remove_piece(t_map *map, t_piece *piece);
-int						map_calc_size(t_map *map);
 int						map_create(t_map *map, int size);
+
+int						map_calc_minsize(t_map *map, int list_size);
+
+void					map_print(t_map *map, char to_color);
 
 /*
 **			pieces.c
 */
+void					piece_end(t_piece *list);
+t_piece					*piece_create(int id);
 t_piece					*pieces_get_byindex(t_piece *list, int index);
+int						piece_count(t_piece *list);
 
 /*
 **
@@ -79,7 +82,8 @@ t_piece					*pieces_get(int fd);
 /*
 **			fillit.c
 */
-int						ft_rec(t_fillit *fi, int pieces_placed);
+int						ft_fillit_place(t_fillit *fi, t_piece *piece, int p_p);
+int						ft_fillit(t_fillit *fi, int pieces_placed);
 
 /*
 **			errors_handlers.c

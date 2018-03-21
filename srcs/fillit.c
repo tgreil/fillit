@@ -1,6 +1,6 @@
 #include "fillit.h"
 
-int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
+int	ft_fillit_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 {
 	int	x;
 	int y;
@@ -14,7 +14,7 @@ int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 			if (map_add_piece(&fi->map, piece, x, y) == TRUE)
 			{
 				piece->placed = TRUE;
-				if (ft_rec(fi, pieces_placed + 1) == EXIT_FINISH)
+				if (ft_fillit(fi, pieces_placed + 1) == EXIT_FINISH)
 					return (EXIT_FINISH);
 				map_remove_piece(&fi->map, piece);
 				piece->placed = FALSE;
@@ -26,16 +26,12 @@ int	ft_rec_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_rec(t_fillit *fi, int pieces_placed)
+int	ft_fillit(t_fillit *fi, int pieces_placed)
 {
-	static unsigned long long nbr = 0;
 	t_piece	*piece;
 	int		i;
 
 	i = 0;
-	printf("%lld\n", nbr++);
-	map_print(&fi->map, TRUE);
-	ft_putchar('\n');
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)
@@ -43,7 +39,7 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 		piece = pieces_get_byindex(fi->list, i);
 		if (piece->placed == FALSE)
 		{
-			if (ft_rec_place(fi, piece, pieces_placed) == EXIT_FINISH)
+			if (ft_fillit_place(fi, piece, pieces_placed) == EXIT_FINISH)
 				return (EXIT_FINISH);
 		}
 		i++;
@@ -51,10 +47,16 @@ int	ft_rec(t_fillit *fi, int pieces_placed)
 	return (EXIT_SUCCESS);
 }
 
+int	ft_fillit_exit(t_fillit *fi)
+{
+	map_end(&fi->map);
+	piece_end(fi->list);
+	return (EXIT_SUCCESS);
+}
+
 int main(int ac, char **av)
 {
 	t_fillit	fi;
-	t_piece		*list;
 	int			fd;
 
 	if (ac != 2)
@@ -62,25 +64,14 @@ int main(int ac, char **av)
 	fi.to_color = TRUE;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR); // ERROR MESG OPEN
-	if (!(list = pieces_get(fd)))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	fi.list = list;
-	fi.list_size = 0;
-	while (list)
-	{
-		list = list->next;
-		fi.list_size++;
-	}
-	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
-	fi.map.size = 6;
-	while (ft_rec(&fi, 0) != EXIT_FINISH)
-	{
+	if (!(fi.list = pieces_get(fd)))
+		return (EXIT_ERROR + ft_putstr("error\n"));
+	fi.list_size = piece_count(fi.list);
+	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH / 2);
+	fi.map.size = map_calc_minsize(&fi.map, fi.list_size);
+	while (ft_fillit(&fi, 0) != EXIT_FINISH)
 		fi.map.size++;
-	}
 	map_print(&fi.map, fi.to_color);
 	close(fd);
-	return (0);
+	return (ft_fillit_exit(&fi));
 }

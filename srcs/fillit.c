@@ -20,7 +20,7 @@ int		fillit(t_fillit *fi, t_piece *piece, int p_placed, int p_nbr)
 
 	if (p_placed == p_nbr)
 	{
-		printf("Calculed: %ld\n", nbr);
+//		printf("Calculed: %ld\n", nbr);
 		return (EXIT_FINISH);
 	}
 	nbr++;

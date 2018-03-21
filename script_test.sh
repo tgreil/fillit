@@ -11,7 +11,6 @@ rm time_file
 
 
 test_unitaire "valid_sample.txt"
-test_unitaire "valid_sample.txt"
 
 
 

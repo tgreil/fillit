@@ -32,7 +32,6 @@ int	ft_fillit(t_fillit *fi, int pieces_placed)
 	int		i;
 
 	i = 0;
-	map_print_nl(&fi->map, TRUE);
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)
@@ -69,7 +68,7 @@ int main(int ac, char **av)
 		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	fi.list_size = piece_count(fi.list);
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH / 2);
-	fi.map.size = map_calc_minsize(&fi.map, fi.list_size);
+	map_calc_minsize(&fi.map, fi.list_size);
 	while (ft_fillit(&fi, 0) != EXIT_FINISH)
 		fi.map.size++;
 	map_print(&fi.map, fi.to_color);

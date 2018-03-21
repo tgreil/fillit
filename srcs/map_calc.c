@@ -8,6 +8,5 @@ int		map_calc_minsize(t_map *map, int list_size)
 	while (min * min < list_size * PIECE_MAX_LENGTH)
 		min++;
 	map->size = min;
-	printf("min: %d\n", min);
 	return (min);
 }

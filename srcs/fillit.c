@@ -1,22 +1,24 @@
 #include "fillit.h"
 
-int	ft_fillit_place(t_fillit *fi, t_piece *piece, int pieces_placed)
+int		fillit(t_map *map, t_piece *piece, int p_placed, int p_nbr)
 {
 	int	x;
 	int y;
 
 	y = 0;
-	while (y < fi->map.size)
+	if (p_placed == p_nbr)
+		return (EXIT_FINISH);
+	while (y < map->size)
 	{
 		x = 0;
-		while (x < fi->map.size)
+		while (x < map->size)
 		{
-			if (map_add_piece(&fi->map, piece, x, y) == TRUE)
+			if (map_add_piece(map, piece, x, y) == TRUE)
 			{
 				piece->placed = TRUE;
-				if (ft_fillit(fi, pieces_placed + 1) == EXIT_FINISH)
+				if (fillit(map, piece->next, p_placed + 1, p_nbr) == EXIT_F)
 					return (EXIT_FINISH);
-				map_remove_piece(&fi->map, piece);
+				map_remove_piece(map, piece);
 				piece->placed = FALSE;
 			}
 			x++;
@@ -26,36 +28,14 @@ int	ft_fillit_place(t_fillit *fi, t_piece *piece, int pieces_placed)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_fillit(t_fillit *fi, int pieces_placed)
-{
-	t_piece	*piece;
-	int		i;
-
-	i = 0;
-	map_print_nl(&fi->map, TRUE);
-	if (pieces_placed == fi->list_size)
-		return (EXIT_FINISH);
-	while (i < fi->list_size)
-	{
-		piece = pieces_get_byindex(fi->list, i);
-		if (piece->placed == FALSE)
-		{
-			if (ft_fillit_place(fi, piece, pieces_placed) == EXIT_FINISH)
-				return (EXIT_FINISH);
-		}
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	ft_fillit_exit(t_fillit *fi)
+int		ft_fillit_exit(t_fillit *fi)
 {
 	map_end(&fi->map);
 	piece_end(fi->list);
 	return (EXIT_SUCCESS);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_fillit	fi;
 	int			fd;
@@ -68,9 +48,9 @@ int main(int ac, char **av)
 	if (!(fi.list = pieces_get(fd)))
 		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	fi.list_size = piece_count(fi.list);
-	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH / 2);
+	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH);
 	map_calc_minsize(&fi.map, fi.list_size);
-	while (ft_fillit(&fi, 0) != EXIT_FINISH)
+	while (fillit(&fi.map, fi.list, 0, fi.list_size) != EXIT_FINISH)
 		fi.map.size++;
 	map_print(&fi.map, fi.to_color);
 	close(fd);

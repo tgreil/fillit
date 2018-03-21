@@ -13,6 +13,7 @@
 # define EXIT_SUCCESS		0
 # define EXIT_ERROR			-1
 # define EXIT_FINISH		1
+# define EXIT_F				EXIT_FINISH
 # define TRUE				1
 # define FALSE				0
 # define COLOR_NB			7
@@ -77,15 +78,14 @@ t_piece					*pieces_get_byindex(t_piece *list, int index);
 int						piece_count(t_piece *list);
 
 /*
-**
+**			parser.c
 */
 t_piece					*pieces_get(int fd);
 
 /*
 **			fillit.c
 */
-int						ft_fillit_place(t_fillit *fi, t_piece *piece, int p_p);
-int						ft_fillit(t_fillit *fi, int pieces_placed);
+int						fillit(t_map *map, t_piece *p, int p_p, int p_n);
 
 /*
 **			errors_handlers.c

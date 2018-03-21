@@ -32,6 +32,7 @@ int	ft_fillit(t_fillit *fi, int pieces_placed)
 	int		i;
 
 	i = 0;
+	map_print_nl(&fi->map, TRUE);
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)

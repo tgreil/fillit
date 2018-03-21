@@ -4,12 +4,10 @@ int		pre_check_errors(char *buf, int ret)
 {
 	int i;
 	int blocks_count;
-	int line_length;
 
 	if (ret < 20)
 		return (FALSE);
 	blocks_count = 0;
-	line_length = 0;
 	i = 0;
 	while (i < 20)
 	{
@@ -25,8 +23,5 @@ int		pre_check_errors(char *buf, int ret)
 		return (FALSE);
 	if (blocks_count != 4)
 		return (FALSE);
-
-	line_length++;
-
 	return (TRUE);
 }

@@ -32,6 +32,7 @@ int	ft_fillit(t_fillit *fi, int pieces_placed)
 	int		i;
 
 	i = 0;
+	map_print_nl(&fi->map, TRUE);
 	if (pieces_placed == fi->list_size)
 		return (EXIT_FINISH);
 	while (i < fi->list_size)
@@ -65,7 +66,7 @@ int main(int ac, char **av)
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR); // ERROR MESG OPEN
 	if (!(fi.list = pieces_get(fd)))
-		return (EXIT_ERROR + ft_putstr("error\n"));
+		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	fi.list_size = piece_count(fi.list);
 	map_create(&fi.map, fi.list_size * PIECE_MAX_LENGTH / 2);
 	fi.map.size = map_calc_minsize(&fi.map, fi.list_size);

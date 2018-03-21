@@ -25,5 +25,8 @@ int		pre_check_errors(char *buf, int ret)
 		return (FALSE);
 	if (blocks_count != 4)
 		return (FALSE);
+
+	line_length++;
+
 	return (TRUE);
 }

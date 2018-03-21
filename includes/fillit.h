@@ -16,6 +16,7 @@
 # define TRUE				1
 # define FALSE				0
 # define COLOR_NB			7
+# define ERROR_MSG			"error\n"
 
 typedef struct			s_coord
 {
@@ -65,6 +66,7 @@ int						map_create(t_map *map, int size);
 int						map_calc_minsize(t_map *map, int list_size);
 
 void					map_print(t_map *map, char to_color);
+void					map_print_nl(t_map *map, char to_color);
 
 /*
 **			pieces.c

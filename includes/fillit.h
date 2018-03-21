@@ -61,7 +61,7 @@ int						ft_putchar(int c);
 **			map.c && map_calc.c && map_print.c
 */
 void					map_end(t_map *map);
-int						map_add_piece(t_map *map, t_piece *piece, int x, int y);
+int						map_add_piece(t_map *map, t_piece *piece);
 int						map_remove_piece(t_map *map, t_piece *piece);
 int						map_create(t_map *map, int size);
 

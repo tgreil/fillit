@@ -16,6 +16,7 @@
 # define EXIT_F				EXIT_FINISH
 # define TRUE				1
 # define FALSE				0
+# define MAP_LIMIT			2
 # define COLOR_NB			7
 # define ERROR_MSG			"error\n"
 

@@ -23,6 +23,10 @@ int		map_add_piece(t_map *map, t_piece *p)
 	int	i;
 
 	i = -1;
+	while (++i < PIECE_MAX_LENGTH)
+		if (p->pos.y + p->coord[i].y >= map->size)
+			return (MAP_LIMIT);
+	i = -1;
 	if (map_add_piece_isfree(map, p) == TRUE)
 	{
 		while (++i < PIECE_MAX_LENGTH)

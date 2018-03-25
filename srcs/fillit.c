@@ -58,7 +58,7 @@ int		main(int ac, char **av)
 		return (EXIT_ERROR);
 	fi.to_color = TRUE;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
-		return (EXIT_ERROR); // ERROR MESG OPEN
+		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	if (!(fi.list = pieces_get(fd)))
 		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	fi.list_size = piece_count(fi.list);
@@ -67,7 +67,7 @@ int		main(int ac, char **av)
 	map_calc_minsize(&fi.map, fi.list_size);
 	while (fillit(&fi, fi.list, 0, fi.list_size) != EXIT_FINISH)
 		fi.map.size++;
-	map_print(&fi.map, fi.to_color = 0);
+	map_print(&fi.map, fi.to_color);
 	close(fd);
 	return (ft_fillit_exit(&fi));
 }

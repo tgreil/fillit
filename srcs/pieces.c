@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pieces.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgreil <tgreil@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 15:35:20 by tgreil            #+#    #+#             */
+/*   Updated: 2018/04/03 15:40:22 by tgreil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 void		piece_end(t_piece *list)
@@ -42,7 +54,7 @@ t_piece		*pieces_get_byindex(t_piece *list, int index)
 	return (tmp);
 }
 
-int		piece_count(t_piece *list)
+int			piece_count(t_piece *list)
 {
 	int	i;
 

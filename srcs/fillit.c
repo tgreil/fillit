@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgreil <tgreil@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 15:35:02 by tgreil            #+#    #+#             */
+/*   Updated: 2018/04/03 15:39:02 by tgreil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 int		fillit_prepare(t_piece *piece)
@@ -56,7 +68,7 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 		return (EXIT_ERROR);
-	fi.to_color = TRUE;
+	fi.to_color = FALSE;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
 	if (!(fi.list = pieces_get(fd)))

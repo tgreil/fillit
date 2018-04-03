@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors_handler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tgreil <tgreil@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 15:34:58 by tgreil            #+#    #+#             */
+/*   Updated: 2018/04/03 15:40:01 by tgreil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 int		get_bounds(int x[4], int y[4], int i)
 {
-	int bound;
-	int j;
+	int	bound;
+	int	j;
 
 	j = 0;
 	bound = 0;
@@ -24,12 +36,13 @@ int		get_bounds(int x[4], int y[4], int i)
 	}
 	return (bound);
 }
+
 int		tetriminos_error_handler(int x[4], int y[4])
 {
-	int i;
-	int two_bound;
-	int one_bound;
-	int three_bound;
+	int	i;
+	int	two_bound;
+	int	one_bound;
+	int	three_bound;
 
 	one_bound = 0;
 	two_bound = 0;
@@ -45,15 +58,16 @@ int		tetriminos_error_handler(int x[4], int y[4])
 			three_bound++;
 		i++;
 	}
-//	printf("three == %d et two = %d et one = %d\n", three_bound, two_bound, one_bound);
-	if ((one_bound + two_bound + three_bound == 4) && ((two_bound >= 2) || (three_bound == 1)))
+	if ((one_bound + two_bound + three_bound == 4) &&
+							((two_bound >= 2) || (three_bound == 1)))
 		return (TRUE);
 	return (FALSE);
 }
+
 int		pre_check_errors(char *buf, int ret)
 {
-	int i;
-	int blocks_count;
+	int	i;
+	int	blocks_count;
 
 	if (ret < 20)
 		return (FALSE);
@@ -65,7 +79,7 @@ int		pre_check_errors(char *buf, int ret)
 			blocks_count++;
 		if (buf[i] != '#' && buf[i] != '.' && buf[i] != '\n')
 			return (FALSE);
-		if ((i % 5) == 4 && buf[i] != '\n') // fin de ligne
+		if ((i % 5) == 4 && buf[i] != '\n')
 			return (FALSE);
 		i++;
 	}

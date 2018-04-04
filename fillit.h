@@ -6,7 +6,7 @@
 /*   By: tgreil <tgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:34:48 by tgreil            #+#    #+#             */
-/*   Updated: 2018/04/03 15:34:54 by tgreil           ###   ########.fr       */
+/*   Updated: 2018/04/04 17:29:28 by tgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MAP_LIMIT			2
 # define COLOR_NB			7
 # define ERROR_MSG			"error\n"
+# define USAGE_MSG			""
 
 typedef struct			s_coord
 {
@@ -66,9 +67,17 @@ typedef struct			s_fillit
 /*
 **			utils.c
 */
+int						ft_usage(void);
 int						ft_memcmp(const void *s1, const void *s2, size_t n);
 int						ft_putstr(char *str);
 int						ft_putchar(int c);
+
+/*
+**			errors_handlers.c
+*/
+int						pre_check_errors(char *buf, int ret);
+int						tetriminos_error_handler(int x[4], int y[4]);
+int						get_bounds(int x[4], int y[4], int i);
 
 /*
 **			map.c && map_calc.c && map_print.c
@@ -98,15 +107,10 @@ int						piece_count(t_piece *list);
 t_piece					*pieces_get(int fd);
 
 /*
-**			fillit.c
+**			fillit.c (main)
 */
+int						fillit_prepare(t_piece *piece);
 int						fillit(t_fillit *fi, t_piece *p, int p_p, int p_n);
+int						ft_fillit_exit(t_fillit *fi);
 
-/*
-**			errors_handlers.c
-*/
-
-int						pre_check_errors(char *buf, int ret);
-int						tetriminos_error_handler(int x[4], int y[4]);
-int						get_bounds(int x[4], int y[4], int i);
 #endif

@@ -6,11 +6,17 @@
 /*   By: tgreil <tgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:35:24 by tgreil            #+#    #+#             */
-/*   Updated: 2018/04/03 15:39:22 by tgreil           ###   ########.fr       */
+/*   Updated: 2018/04/04 17:28:35 by tgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int			ft_usage(void)
+{
+	ft_putstr("usage : ./fillit source_file\n");
+	return (EXIT_SUCCESS);
+}
 
 int			ft_memcmp(const void *s1, const void *s2, size_t n)
 {

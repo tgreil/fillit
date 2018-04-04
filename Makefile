@@ -4,7 +4,7 @@ NAME	=	fillit
 
 CFLAGS	+=	-Wall -Wextra -Werror -O3
 
-CFLAGS	+=	-Iincludes
+CFLAGS	+=	-I.
 
 SRCS	=	fillit.c			\
 			map.c				\
@@ -15,7 +15,7 @@ SRCS	=	fillit.c			\
 			parser.c			\
 			errors_handler.c
 
-OBJS	=	$(addprefix srcs/, $(SRCS:.c=.o))
+OBJS	=	$(SRCS:.c=.o)
 
 $(NAME):	 $(OBJS)
 		gcc -o $(NAME) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: tgreil <tgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:35:02 by tgreil            #+#    #+#             */
-/*   Updated: 2018/04/03 15:39:02 by tgreil           ###   ########.fr       */
+/*   Updated: 2018/04/04 17:35:18 by tgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		main(int ac, char **av)
 	int			fd;
 
 	if (ac != 2)
-		return (EXIT_ERROR);
+		return (EXIT_ERROR + ft_usage());
 	fi.to_color = FALSE;
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 		return (EXIT_ERROR + ft_putstr(ERROR_MSG));
